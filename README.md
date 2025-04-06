@@ -1,4 +1,4 @@
-# llmthinkbench: LLM Reasoning Evaluation Framework
+# LLMThinkBench: LLM Reasoning and Ovethinking Evaluation Framework
 
 A framework for evaluating overthinking and basic reasoning capabilities of Large Language Models
 
