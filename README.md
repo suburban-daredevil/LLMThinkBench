@@ -279,7 +279,7 @@ If you use LLMThinkBench in your research, please cite:
   author = {Gaurav Srivastava, Aafiya Hussain, Sriram Srinivasan, Aninditaa Chauhan},
   title = {LLMThinkBench: Advanced Reasoning and Overthinking Evaluation Framework for LLMs},
   year = {2025},
-  url = {[https://github.com/yourusername/llmthinkbench](https://github.com/ctrl-gaurav/LLMThinkBench/)}
+  url = {https://github.com/ctrl-gaurav/LLMThinkBench/}
 }
 ```
 
