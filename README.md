@@ -1,4 +1,4 @@
-# LLMThinkBench 🧠
+# LLMThinkBench: An Advanced Reasoning and Overthinking Evaluation Framework for Language Models 🧠
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
@@ -276,13 +276,13 @@ If you use LLMThinkBench in your research, please cite:
 
 ```
 @software{llmthinkbench2025,
-  author = {Your Name},
-  title = {LLMThinkBench: Advanced Reasoning Evaluation Framework for LLMs},
+  author = {Gaurav Srivasta, Aafiya Hussain, Sriram Srinivasan, Aninditaa Chauhan},
+  title = {LLMThinkBench: Advanced Reasoning and Overthinking Evaluation Framework for LLMs},
   year = {2025},
-  url = {https://github.com/yourusername/llmthinkbench}
+  url = {[https://github.com/yourusername/llmthinkbench](https://github.com/ctrl-gaurav/LLMThinkBench/)}
 }
 ```
 
 ## 📧 Contact
 
-For questions, issues, or feedback, please [open an issue](https://github.com/yourusername/llmthinkbench/issues) on GitHub.
+For questions, issues, or feedback, please [open an issue](https://github.com/ctrl-gaurav/llmthinkbench/issues) on GitHub.
