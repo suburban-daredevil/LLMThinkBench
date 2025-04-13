@@ -11,13 +11,21 @@ from llmthinkbench.utils.reporting import generate_final_report
 from llmthinkbench.models.model_handler import ModelHandler
 from llmthinkbench.tasks.sorting_task import SortingTask
 from llmthinkbench.tasks.comparison_task import ComparisonTask
+from llmthinkbench.tasks.sum_task import SumTask
+from llmthinkbench.tasks.multiplication_task import MultiplicationTask
+from llmthinkbench.tasks.odd_count_task import OddCountTask
+from llmthinkbench.tasks.even_count_task import EvenCountTask
+from llmthinkbench.tasks.absolute_difference_task import AbsoluteDifferenceTask
+from llmthinkbench.tasks.division_task import DivisionTask
+from llmthinkbench.tasks.find_maximum_task import FindMaximumTask
+from llmthinkbench.tasks.find_minimum_task import FindMinimumTask
 
 def parse_arguments():
     """Parse command line arguments"""
     parser = argparse.ArgumentParser(description='LLMThinkBench: Evaluate LLM reasoning capabilities')
     parser.add_argument('--model_id', required=True, help='Hugging Face model ID')
     parser.add_argument('--tasks', nargs='+', default=['sorting'], 
-                        help='Tasks to evaluate (e.g., sorting, comparison)')
+                        help='Tasks to evaluate (e.g., sorting, comparison, sum, multiplication, etc.)')
     parser.add_argument('--datapoints', type=int, default=1000, 
                         help='Number of samples per test case')
     parser.add_argument('--folds', type=int, default=1, 
@@ -25,7 +33,7 @@ def parse_arguments():
     parser.add_argument('--range', nargs=2, type=int, default=[-100, 100], 
                         help='Number range for evaluation')
     parser.add_argument('--list_sizes', nargs='+', type=int, default=[8], 
-                        help='List sizes to evaluate (for sorting task)')
+                        help='List sizes to evaluate (for list-based tasks)')
     parser.add_argument('--store_details', action='store_true', 
                         help='Store detailed per-example results')
     parser.add_argument('--output_dir', type=str, default=None,
@@ -60,7 +68,15 @@ def load_task_class(task_name):
     """Get task class based on task name"""
     task_mapping = {
         'sorting': SortingTask,
-        'comparison': ComparisonTask
+        'comparison': ComparisonTask,
+        'sum': SumTask,
+        'multiplication': MultiplicationTask,
+        'odd_count': OddCountTask,
+        'even_count': EvenCountTask,
+        'absolute_difference': AbsoluteDifferenceTask,
+        'division': DivisionTask,
+        'find_maximum': FindMaximumTask,
+        'find_minimum': FindMinimumTask
     }
     
     if task_name in task_mapping:
@@ -119,12 +135,10 @@ def main():
         )
         
         # Task-specific configuration
-        if task_name == 'sorting':
+        if task_name in ['sorting', 'sum', 'multiplication', 'odd_count', 'even_count', 'find_maximum', 'find_minimum']:
             task_metrics = task.run_evaluation(args.list_sizes)
-        elif task_name == 'comparison':
-            task_metrics = task.run_evaluation()
         else:
-            # Generic task interface
+            # Generic task interface or pair-based tasks
             task_metrics = task.run_evaluation()
             
         all_metrics.extend(task_metrics)

@@ -2,8 +2,16 @@ import re
 import json
 import logging
 
-def parse_boxed_answer(response):
-    """Robust extraction and parsing of boxed answer"""
+def parse_sorted_list(response):
+    """
+    Extract and parse a sorted list from a boxed answer in the response.
+    
+    Args:
+        response (str): The model's response text
+        
+    Returns:
+        list or None: Parsed list of integers if found, None otherwise
+    """
     # Find all potential boxed answers with flexible parsing
     matches = re.findall(
         r'\\boxed{([\d\-\s,\[\]\(\)]+)}', 

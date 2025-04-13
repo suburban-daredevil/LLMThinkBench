@@ -11,6 +11,14 @@ __author__ = "Gaurav Srivastava"
 from .tasks.base_task import BaseTask
 from .tasks.sorting_task import SortingTask
 from .tasks.comparison_task import ComparisonTask
+from .tasks.sum_task import SumTask
+from .tasks.multiplication_task import MultiplicationTask
+from .tasks.odd_count_task import OddCountTask
+from .tasks.even_count_task import EvenCountTask
+from .tasks.absolute_difference_task import AbsoluteDifferenceTask
+from .tasks.division_task import DivisionTask
+from .tasks.find_maximum_task import FindMaximumTask
+from .tasks.find_minimum_task import FindMinimumTask
 from .models.model_handler import ModelHandler
 from .utils.reporting import generate_final_report
 
@@ -21,7 +29,7 @@ def evaluate(model_id, tasks=None, **kwargs):
     
     Args:
         model_id (str): Hugging Face model ID
-        tasks (list): List of tasks to evaluate (default: ["sorting", "comparison"])
+        tasks (list): List of tasks to evaluate (default: all available tasks)
         **kwargs: Additional arguments for evaluation
         
     Returns:
@@ -29,5 +37,6 @@ def evaluate(model_id, tasks=None, **kwargs):
     """
     from .cli import run_evaluation
     if tasks is None:
-        tasks = ["sorting", "comparison"]
+        tasks = ["sorting", "comparison", "sum", "multiplication", "odd_count", 
+                "even_count", "absolute_difference", "division", "find_maximum", "find_minimum"]
     return run_evaluation(model_id, tasks, **kwargs)

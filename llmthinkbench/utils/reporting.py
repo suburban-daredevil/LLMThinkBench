@@ -39,14 +39,15 @@ def generate_final_report(all_metrics, list_sizes, output_dir):
     
     # Process metrics for each task
     for task_name, task_metrics in tasks.items():
-        if task_name == 'sorting':
-            # Process sorting task by list size
+        if task_name in ['sorting', 'find_maximum', 'find_minimum'] or task_name.startswith(('find_maximum_', 'find_minimum_')):
+            # Process list-based tasks by list size
             for size in list_sizes:
                 size_metrics = [m for m in task_metrics if m.get('list_size') == size]
                 if not size_metrics:
                     continue
                     
-                report[f"sorting_{size}"] = {
+                task_size_name = f"{task_name}_{size}" if not task_name.endswith(f"_{size}") else task_name
+                report[task_size_name] = {
                     'accuracy': {
                         'mean': round(np.mean([m['accuracy'] for m in size_metrics]), 4),
                         'std': round(np.std([m['accuracy'] for m in size_metrics]), 4) if len(size_metrics) > 1 else 0
