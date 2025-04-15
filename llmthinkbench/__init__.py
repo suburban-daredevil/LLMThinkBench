@@ -22,6 +22,7 @@ from .tasks.find_minimum_task import FindMinimumTask
 from .tasks.mean_task import MeanTask
 from .tasks.median_task import MedianTask
 from .tasks.mode_task import ModeTask
+from .tasks.subtraction_task import SubtractionTask
 from .models.model_handler import ModelHandler
 from .utils.reporting import generate_final_report
 
@@ -41,5 +42,5 @@ def evaluate(model_id, tasks=None, **kwargs):
     from .cli import run_evaluation
     if tasks is None:
         tasks = ["sorting", "comparison", "sum", "multiplication", "odd_count", 
-                "even_count", "absolute_difference", "division", "find_maximum", "find_minimum", "mean", "median", "mode"]
+                "even_count", "absolute_difference", "division", "find_maximum", "find_minimum", "mean", "median", "mode", "subtraction"]
     return run_evaluation(model_id, tasks, **kwargs)
