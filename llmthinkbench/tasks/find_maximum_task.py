@@ -24,8 +24,7 @@ class FindMaximumTask(BaseTask):
     def evaluate_response(self, response, data_point):
         """Evaluate model response for find maximum task"""
         ground_truth = max(data_point)
-        parsed_answer = parse_find_maximum_answer(response)
-        instruction_followed = parsed_answer is not None
+        instruction_followed, parsed_answer = parse_find_maximum_answer(response)
         accuracy = 0
         
         if instruction_followed:
