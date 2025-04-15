@@ -19,10 +19,16 @@ from llmthinkbench.tasks.absolute_difference_task import AbsoluteDifferenceTask
 from llmthinkbench.tasks.division_task import DivisionTask
 from llmthinkbench.tasks.find_maximum_task import FindMaximumTask
 from llmthinkbench.tasks.find_minimum_task import FindMinimumTask
+from llmthinkbench.tasks.mean_task import MeanTask
+from llmthinkbench.tasks.median_task import MedianTask
+from llmthinkbench.tasks.mode_task import ModeTask
+from llmthinkbench.tasks.subtraction_task import SubtractionTask
 
 def parse_arguments():
     """Parse command line arguments"""
-    parser = argparse.ArgumentParser(description='LLMThinkBench: Evaluate LLM reasoning capabilities')
+    parser = argparse.ArgumentParser(description='LLMThinkBench: Evaluate LLM basic reasoning and overthinking capabilities')
+    parser.add_argument('--version', action='version', 
+                        version=f'LLMThinkBench {importlib.import_module("llmthinkbench").__version__}')
     parser.add_argument('--model_id', required=True, help='Hugging Face model ID')
     parser.add_argument('--tasks', nargs='+', default=['sorting'], 
                         help='Tasks to evaluate (e.g., sorting, comparison, sum, multiplication, etc.)')
@@ -76,7 +82,11 @@ def load_task_class(task_name):
         'absolute_difference': AbsoluteDifferenceTask,
         'division': DivisionTask,
         'find_maximum': FindMaximumTask,
-        'find_minimum': FindMinimumTask
+        'find_minimum': FindMinimumTask,
+        'mean': MeanTask,
+        'median': MedianTask,
+        'mode': ModeTask,
+        'subtraction': SubtractionTask
     }
     
     if task_name in task_mapping:
@@ -96,6 +106,10 @@ def load_task_class(task_name):
 def main():
     # Parse arguments
     args = parse_arguments()
+
+    # Check if model_id is provided (won't be needed if --version was called)
+    if not args.model_id:
+        sys.exit(0)  # The version flag would have already caused an exit if it was used
     
     # Create output directory
     output_dir = create_output_directory(args)
@@ -135,7 +149,7 @@ def main():
         )
         
         # Task-specific configuration
-        if task_name in ['sorting', 'sum', 'multiplication', 'odd_count', 'even_count', 'find_maximum', 'find_minimum']:
+        if task_name in ['sorting', 'sum', 'multiplication', 'odd_count', 'even_count', 'find_maximum', 'find_minimum', 'mean', 'median', 'mode']:
             task_metrics = task.run_evaluation(args.list_sizes)
         else:
             # Generic task interface or pair-based tasks

@@ -11,6 +11,10 @@ from .absolute_difference_task import AbsoluteDifferenceTask
 from .division_task import DivisionTask
 from .find_maximum_task import FindMaximumTask
 from .find_minimum_task import FindMinimumTask
+from .mean_task import MeanTask
+from .median_task import MedianTask
+from .mode_task import ModeTask
+from .subtraction_task import SubtractionTask
 
 # python -m llmthinkbench.cli --model_id "Qwen/Qwen2.5-1.5B-Instruct" --tensor_parallel_size 1 --gpu_memory_utilization 0.95 --temperature 0.7 --top_p 0.9 --max_tokens 1024 --tasks sorting comparison sum multiplication odd_count even_count absolute_difference division find_maximum find_minimum --datapoints 5 --list_sizes 8 --folds 1 --range -100 100 --store_details
 
@@ -25,7 +29,11 @@ AVAILABLE_TASKS = {
     "absolute_difference": AbsoluteDifferenceTask,
     "division": DivisionTask,
     "find_maximum": FindMaximumTask,
-    "find_minimum": FindMinimumTask
+    "find_minimum": FindMinimumTask,
+    "mean": MeanTask,
+    "median": MedianTask,
+    "mode": ModeTask,
+    "subtraction": SubtractionTask
 }
 
 def get_task_class(task_name):
@@ -36,4 +44,5 @@ def get_task_class(task_name):
 
 __all__ = ["BaseTask", "SortingTask", "ComparisonTask", "SumTask", "MultiplicationTask", 
            "OddCountTask", "EvenCountTask", "AbsoluteDifferenceTask", "DivisionTask", 
-           "FindMaximumTask", "FindMinimumTask", "get_task_class", "AVAILABLE_TASKS"]
+           "FindMaximumTask", "FindMinimumTask", "MeanTask", "MedianTask", "ModeTask", "SubtractionTask", 
+           "get_task_class", "AVAILABLE_TASKS"]

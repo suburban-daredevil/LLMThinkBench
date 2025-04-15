@@ -31,7 +31,8 @@ class FindMinimumTask(BaseTask):
     def evaluate_response(self, response, data_point):
         """Evaluate model response for finding minimum task"""
         ground_truth = min(data_point)
-        instruction_followed, extracted_answer = parse_find_minimum_answer(response)
+        extracted_answer = parse_find_minimum_answer(response)
+        instruction_followed = extracted_answer is not None
         accuracy = 0
         
         if instruction_followed:

@@ -5,7 +5,7 @@ This package provides tools to assess LLM performance on various reasoning tasks
 measuring accuracy, instruction following, and other metrics.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.2"
 __author__ = "Gaurav Srivastava"
 
 from .tasks.base_task import BaseTask
@@ -19,6 +19,9 @@ from .tasks.absolute_difference_task import AbsoluteDifferenceTask
 from .tasks.division_task import DivisionTask
 from .tasks.find_maximum_task import FindMaximumTask
 from .tasks.find_minimum_task import FindMinimumTask
+from .tasks.mean_task import MeanTask
+from .tasks.median_task import MedianTask
+from .tasks.mode_task import ModeTask
 from .models.model_handler import ModelHandler
 from .utils.reporting import generate_final_report
 
@@ -38,5 +41,5 @@ def evaluate(model_id, tasks=None, **kwargs):
     from .cli import run_evaluation
     if tasks is None:
         tasks = ["sorting", "comparison", "sum", "multiplication", "odd_count", 
-                "even_count", "absolute_difference", "division", "find_maximum", "find_minimum"]
+                "even_count", "absolute_difference", "division", "find_maximum", "find_minimum", "mean", "median", "mode"]
     return run_evaluation(model_id, tasks, **kwargs)
