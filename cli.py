@@ -149,8 +149,13 @@ def main():
         )
         
         # Task-specific configuration
-        if task_name in ['sorting', 'sum', 'multiplication', 'odd_count', 'even_count', 'find_maximum', 'find_minimum', 'mean', 'median', 'mode']:
+        if task_name in ['sorting', 'sum', 'odd_count', 'even_count', 'find_maximum', 'find_minimum', 'mean', 'median', 'mode']:
             task_metrics = task.run_evaluation(args.list_sizes)
+
+        elif task_name == 'multiplication':
+            # Use specific list sizes for multiplication task: 2, 4, and 8, error beyond list size 8
+            task_metrics = task.run_evaluation([2, 4, 8])
+        
         else:
             # Generic task interface or pair-based tasks
             task_metrics = task.run_evaluation()

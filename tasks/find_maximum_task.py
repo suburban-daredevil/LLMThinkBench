@@ -24,17 +24,16 @@ class FindMaximumTask(BaseTask):
     def evaluate_response(self, response, data_point):
         """Evaluate model response for find maximum task"""
         ground_truth = max(data_point)
-        parsed_answer = parse_find_maximum_answer(response)
-        instruction_followed = parsed_answer is not None
+        instruction_followed, parsed_answer = parse_find_maximum_answer(response)
         accuracy = 0
         
-        if instruction_followed:
-            try:
-                accuracy = 1 if parsed_answer == ground_truth else 0
-            except Exception as e:
-                logging.debug(f"Comparison error: {e}")
-                accuracy = 0
-        
+        try:
+            # If parsed answer is correct, set accuracy to 1 regardless of instruction following
+            accuracy = 1 if parsed_answer == ground_truth else 0
+        except Exception as e:
+            logging.debug(f"Comparison error: {e}")
+            accuracy = 0
+            
         return {
             "input_list": data_point,
             "ground_truth": ground_truth,

@@ -31,16 +31,15 @@ class FindMinimumTask(BaseTask):
     def evaluate_response(self, response, data_point):
         """Evaluate model response for finding minimum task"""
         ground_truth = min(data_point)
-        extracted_answer = parse_find_minimum_answer(response)
-        instruction_followed = extracted_answer is not None
+        instruction_followed, extracted_answer = parse_find_minimum_answer(response)
         accuracy = 0
         
-        if instruction_followed:
-            try:
-                accuracy = 1 if extracted_answer == ground_truth else 0
-            except Exception as e:
-                logging.debug(f"Comparison error: {e}")
-                accuracy = 0
+        try:
+            # If parsed answer is correct, set accuracy to 1 regardless of instruction following
+            accuracy = 1 if extracted_answer == ground_truth else 0
+        except Exception as e:
+            logging.debug(f"Comparison error: {e}")
+            accuracy = 0
         
         return {
             "input_list": data_point,

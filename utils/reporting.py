@@ -39,14 +39,26 @@ def generate_final_report(all_metrics, list_sizes, output_dir):
     
     # Process metrics for each task
     for task_name, task_metrics in tasks.items():
-        if task_name in ['sorting', 'find_maximum', 'find_minimum'] or task_name.startswith(('find_maximum_', 'find_minimum_')):
-            # Process list-based tasks by list size
-            for size in list_sizes:
-                size_metrics = [m for m in task_metrics if m.get('list_size') == size]
+        # Process list-based tasks by list size
+        # Special handling for tasks that have list sizes
+        list_based_tasks = ['sorting', 'find_maximum', 'find_minimum', 'sum', 'multiplication', 
+                           'odd_count', 'even_count', 'mean', 'median', 'mode']
+        
+        if task_name in list_based_tasks:
+            # Group by the actual list size in the metrics
+            size_groups = {}
+            for metric in task_metrics:
+                size = metric.get('list_size')
+                if size not in size_groups:
+                    size_groups[size] = []
+                size_groups[size].append(metric)
+                
+            # Process each size group
+            for size, size_metrics in size_groups.items():
                 if not size_metrics:
                     continue
                     
-                task_size_name = f"{task_name}_{size}" if not task_name.endswith(f"_{size}") else task_name
+                task_size_name = f"{task_name}_{size}"
                 report[task_size_name] = {
                     'accuracy': {
                         'mean': round(np.mean([m['accuracy'] for m in size_metrics]), 4),
