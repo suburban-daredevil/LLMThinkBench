@@ -525,63 +525,63 @@ def extract_from_explicit_statements(text):
     # Common patterns for explicit answer statements (generic, not specific to any task)
     patterns = [
         # Answer: X or The answer is X
-        r'(?:^|\n|\s)(?:answer|the answer is|final answer|the final answer is)[:\s]+([^\n\.]+)',
+        r'(?:^|\n|\s)(?:answer|the answer is|final answer|the final answer is)[:\s]+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
         # The answer is \\(X\\)
         r'(?:^|\n|\s)(?:the answer is)[:\s]+\\\\[\(\[]([^\\]+)\\\\[\)\]]',
         # Therefore, X is the answer
-        r'(?:^|\n|\s)(?:therefore,?)[:\s]+([^\n\.]+)(?:\s+is the answer)',
+        r'(?:^|\n|\s)(?:therefore,?)[:\s]+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)(?:\s+is the answer)',
         # Therefore, the answer is X
-        r'(?:^|\n|\s)(?:therefore,? the answer is)[:\s]+([^\n\.]+)',
+        r'(?:^|\n|\s)(?:therefore,? the answer is)[:\s]+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
         # Thus, the answer is X
-        r'(?:^|\n|\s)(?:thus,? the answer is)[:\s]+([^\n\.]+)',
+        r'(?:^|\n|\s)(?:thus,? the answer is)[:\s]+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
         # So, the answer is X
-        r'(?:^|\n|\s)(?:so,? the answer is)[:\s]+([^\n\.]+)',
+        r'(?:^|\n|\s)(?:so,? the answer is)[:\s]+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
         # Hence, the answer is X
-        r'(?:^|\n|\s)(?:hence,? the answer is)[:\s]+([^\n\.]+)',
+        r'(?:^|\n|\s)(?:hence,? the answer is)[:\s]+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
         # The result is X
-        r'(?:^|\n|\s)(?:the result is)[:\s]+([^\n\.]+)',
+        r'(?:^|\n|\s)(?:the result is)[:\s]+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
         # The value is X
-        r'(?:^|\n|\s)(?:the value is)[:\s]+([^\n\.]+)',
+        r'(?:^|\n|\s)(?:the value is)[:\s]+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
         # The quotient is X
-        r'(?:^|\n|\s)(?:the quotient is)[:\s]+([^\n\.]+)',
+        r'(?:^|\n|\s)(?:the quotient is)[:\s]+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
         # The number is X
-        r'(?:^|\n|\s)(?:the number is)[:\s]+([^\n\.]+)',
+        r'(?:^|\n|\s)(?:the number is)[:\s]+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
         # The output is X
-        r'(?:^|\n|\s)(?:the output is)[:\s]+([^\n\.]+)',
+        r'(?:^|\n|\s)(?:the output is)[:\s]+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
         # The solution is X
-        r'(?:^|\n|\s)(?:the solution is)[:\s]+([^\n\.]+)',
+        r'(?:^|\n|\s)(?:the solution is)[:\s]+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
         # X is the answer
-        r'(?:^|\n|\s)([^\n\.\s]+)(?:\s+is the answer)',
+        r'(?:^|\n|\s)([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)(?:\s+is the answer)',
         # X is the result
-        r'(?:^|\n|\s)([^\n\.\s]+)(?:\s+is the result)',
+        r'(?:^|\n|\s)([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)(?:\s+is the result)',
         # X is the value
-        r'(?:^|\n|\s)([^\n\.\s]+)(?:\s+is the value)',
+        r'(?:^|\n|\s)([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)(?:\s+is the value)',
         # X is the number
-        r'(?:^|\n|\s)([^\n\.\s]+)(?:\s+is the number)',
+        r'(?:^|\n|\s)([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)(?:\s+is the number)',
         # X is the output
-        r'(?:^|\n|\s)([^\n\.\s]+)(?:\s+is the output)',
+        r'(?:^|\n|\s)([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)(?:\s+is the output)',
         # X is the solution
-        r'(?:^|\n|\s)([^\n\.\s]+)(?:\s+is the solution)',
+        r'(?:^|\n|\s)([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)(?:\s+is the solution)',
         # X is the product
-        r'(?:^|\n|\s)([^\n\.\s]+)(?:\s+is the product)',
+        r'(?:^|\n|\s)([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)(?:\s+is the product)',
         # The quotient of the numbers is X
-        r'(?:^|\n|\s)(?:the quotient of the (?:given )?(?:numbers|list) is)[:\s]+([^\n\.]+)',
+        r'(?:^|\n|\s)(?:the quotient of the (?:given )?(?:numbers|list) is)[:\s]+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
         # The result of dividing the numbers is X
-        r'(?:^|\n|\s)(?:the result of dividing the numbers is)[:\s]+([^\n\.]+)',
+        r'(?:^|\n|\s)(?:the result of dividing the numbers is)[:\s]+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
         # The result of the division is X
-        r'(?:^|\n|\s)(?:the result of the division is)[:\s]+([^\n\.]+)',
+        r'(?:^|\n|\s)(?:the result of the division is)[:\s]+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
         # The division result is X
-        r'(?:^|\n|\s)(?:the division result is)[:\s]+([^\n\.]+)',
+        r'(?:^|\n|\s)(?:the division result is)[:\s]+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
         # Dividing these numbers gives X
-        r'(?:^|\n|\s)(?:dividing these numbers gives)[:\s]+([^\n\.]+)',
+        r'(?:^|\n|\s)(?:dividing these numbers gives)[:\s]+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
         # Dividing number 1 by number 2 gives X
-        r'(?:^|\n|\s)(?:dividing number 1 by number 2 gives)[:\s]+([^\n\.]+)',
+        r'(?:^|\n|\s)(?:dividing number 1 by number 2 gives)[:\s]+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
         # When we divide the numbers, we get X
-        r'(?:^|\n|\s)(?:when we divide the numbers,? we get)[:\s]+([^\n\.]+)',
+        r'(?:^|\n|\s)(?:when we divide the numbers,? we get)[:\s]+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
         # When we divide number 1 by number 2, we get X
-        r'(?:^|\n|\s)(?:when we divide number 1 by number 2,? we get)[:\s]+([^\n\.]+)',
+        r'(?:^|\n|\s)(?:when we divide number 1 by number 2,? we get)[:\s]+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
         # The division of number 1 by number 2 is X
-        r'(?:^|\n|\s)(?:the division of number 1 by number 2 is)[:\s]+([^\n\.]+)',
+        r'(?:^|\n|\s)(?:the division of number 1 by number 2 is)[:\s]+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
         # Patterns for backticked numbers (division-specific)
         r'(?:^|\n|\s)(?:the quotient of the (?:given )?(?:numbers|list) is)[:\s]+`([^`]+)`',
         r'(?:^|\n|\s)(?:the result of dividing the numbers is)[:\s]+`([^`]+)`',
