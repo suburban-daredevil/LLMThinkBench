@@ -38,14 +38,8 @@ class AbsoluteDifferenceTask(BaseTask):
         instruction_followed, answer = parse_absolute_difference_answer(response)
         accuracy = 0
         
-        if instruction_followed and answer is not None:
-            try:
-                # Convert answer to int if it's not already
-                if isinstance(answer, str):
-                    answer = int(float(answer))
-                accuracy = 1 if answer == ground_truth else 0
-            except (ValueError, TypeError):
-                accuracy = 0
+        if (ground_truth == answer):
+            accuracy = 1
         
         return {
             "input_numbers": data_point,
