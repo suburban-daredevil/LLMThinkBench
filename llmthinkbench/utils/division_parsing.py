@@ -592,6 +592,10 @@ def extract_from_explicit_statements(text):
         r'(?:^|\n|\s)(?:when we divide the numbers,? we get)[:\s]+`([^`]+)`',
         r'(?:^|\n|\s)(?:when we divide number 1 by number 2,? we get)[:\s]+`([^`]+)`',
         r'(?:^|\n|\s)(?:the division of number 1 by number 2 is)[:\s]+`([^`]+)`',
+        # Patterns for "approximately" (division-specific)
+        r'(?:^|\n|\s)(?:is|=)\s*approximately\s+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
+        r'(?:^|\n|\s)(?:approximately|about|around|roughly|close to)\s+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
+        r'(?:^|\n|\s)(?:approximately equal to|approximately equals)\s+([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)',
     ]
     
     for pattern in patterns:
