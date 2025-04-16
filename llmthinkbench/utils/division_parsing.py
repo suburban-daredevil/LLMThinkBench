@@ -290,13 +290,15 @@ def clean_and_convert_to_number(text):
     # Handle cases where the model provides a calculation like "X / Y = Z"
     calc_match = re.search(r'([+-]?\d+(?:\.\d+)?)\s*[÷/]\s*([+-]?\d+(?:\.\d+)?)\s*=\s*([+-]?\d+(?:\.\d+)?)', text)
     if calc_match:
-        return int(float(calc_match.group(3))) if '.' not in calc_match.group(3) else float(calc_match.group(3))
+        float_val = float(calc_match.group(3))
+        return int(float_val) if float_val == int(float_val) else float_val
     
     # Handle cases where the model provides a calculation with multiple steps
     # Look for the last "=" in the text
     last_equal_match = re.search(r'=\s*([+-]?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)\s*$', text)
     if last_equal_match:
-        return int(float(last_equal_match.group(1))) if '.' not in last_equal_match.group(1) and 'e' not in last_equal_match.group(1).lower() else float(last_equal_match.group(1))
+        float_val = float(last_equal_match.group(1))
+        return int(float_val) if float_val == int(float_val) else float_val
     
     # Try to convert to a number
     try:
@@ -305,7 +307,8 @@ def clean_and_convert_to_number(text):
         if number_match:
             number_str = number_match.group(1)
             # Convert to int or float as appropriate
-            return int(float(number_str)) if '.' not in number_str and 'e' not in number_str.lower() else float(number_str)
+            float_val = float(number_str)
+            return int(float_val) if float_val == int(float_val) else float_val
     except ValueError:
         pass
     
@@ -983,41 +986,47 @@ def extract_plain_number(text):
         if number_match:
             number_str = number_match.group(0)
             # Convert to int or float as appropriate
-            return int(float(number_str)) if '.' not in number_str else float(number_str)
+            float_val = float(number_str)
+            return int(float_val) if float_val == int(float_val) else float_val
     
     # Look for a number at the end of the text
     number_match = re.search(r'([+-]?\d+(?:\.\d+)?)$', text.strip())
     if number_match:
         number_str = number_match.group(1)
         # Convert to int or float as appropriate
-        return int(float(number_str)) if '.' not in number_str else float(number_str)
+        float_val = float(number_str)
+        return int(float_val) if float_val == int(float_val) else float_val
     
     # Look for a number in square brackets
     bracket_match = re.search(r'\[([+-]?\d+(?:\.\d+)?)\]', text)
     if bracket_match:
         number_str = bracket_match.group(1)
         # Convert to int or float as appropriate
-        return int(float(number_str)) if '.' not in number_str else float(number_str)
+        float_val = float(number_str)
+        return int(float_val) if float_val == int(float_val) else float_val
     
     # Look for a number in parentheses
     paren_match = re.search(r'\(([+-]?\d+(?:\.\d+)?)\)', text)
     if paren_match:
         number_str = paren_match.group(1)
         # Convert to int or float as appropriate
-        return int(float(number_str)) if '.' not in number_str else float(number_str)
+        float_val = float(number_str)
+        return int(float_val) if float_val == int(float_val) else float_val
     
     # Look for a number preceded by "is" or "="
     is_match = re.search(r'(?:is|=)\s*([+-]?\d+(?:\.\d+)?)', text)
     if is_match:
         number_str = is_match.group(1)
         # Convert to int or float as appropriate
-        return int(float(number_str)) if '.' not in number_str else float(number_str)
+        float_val = float(number_str)
+        return int(float_val) if float_val == int(float_val) else float_val
     
     # Look for a number preceded by "quotient" or "division"
     quotient_match = re.search(r'(?:quotient|division|result|divide)(?:\s+(?:of|the|numbers|value|result))?\s+(?:is|=)\s*([+-]?\d+(?:\.\d+)?)', text.lower())
     if quotient_match:
         number_str = quotient_match.group(1)
         # Convert to int or float as appropriate
-        return int(float(number_str)) if '.' not in number_str else float(number_str)
+        float_val = float(number_str)
+        return int(float_val) if float_val == int(float_val) else float_val
     
     return None
