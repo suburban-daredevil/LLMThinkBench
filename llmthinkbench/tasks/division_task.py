@@ -40,7 +40,7 @@ class DivisionTask(BaseTask):
         instruction_followed, parsed_answer = parse_division_answer(response)
         
         accuracy = 0
-        if instruction_followed and parsed_answer is not None:
+        if parsed_answer is not None and ground_truth is not None:
             # Compare with 2 decimal precision
             if round(parsed_answer, 2) == round(ground_truth, 2):
                 accuracy = 1

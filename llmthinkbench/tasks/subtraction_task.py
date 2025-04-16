@@ -38,13 +38,8 @@ class SubtractionTask(BaseTask):
         instruction_followed, parsed_answer = parse_subtraction_answer(response)
         accuracy = 0
         
-        if instruction_followed and parsed_answer is not None:
-            try:
-                # Allow for exact match
-                accuracy = 1 if parsed_answer == ground_truth else 0
-            except Exception as e:
-                logging.debug(f"Comparison error: {e}")
-                accuracy = 0
+        if (ground_truth == parsed_answer):
+            accuracy = 1
         
         return {
             "numbers": data_point,
