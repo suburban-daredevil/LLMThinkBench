@@ -8,7 +8,7 @@ def format_report_table(report_data):
     """Create pretty-printed table from report data"""
     headers = [
         "Task", "Accuracy", 
-        "Instruction Followed ", "Tokens","Chars", "Words", 
+        "Instruction Followed", "Tokens", "Chars", "Words", 
     ]
     
     rows = []
