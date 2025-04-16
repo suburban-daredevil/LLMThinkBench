@@ -35,14 +35,14 @@ class MultiplicationTask(BaseTask):
         instruction_followed, parsed_answer = parse_multiplication_answer(response)
         
         accuracy = 0
-        if instruction_followed and parsed_answer is not None:
+        if parsed_answer:
             try:
-                # Convert to int if possible
                 parsed_answer = int(float(parsed_answer))
-                if parsed_answer == ground_truth:
-                    accuracy = 1
-            except (ValueError, TypeError):
-                accuracy = 0
+            except ValueError:
+                pass
+            
+        if (parsed_answer == ground_truth):
+            accuracy = 1
         
         return {
             "input_list": data_point,
