@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="llmthinkbench",
-    version="0.1.3",  # Initial version
+    version="0.1.4",  # Initial version
     author="Gaurav Srivastava",
     author_email="gauravhhh30@gmail.com",
     description="A framework for evaluating overthinking and basic reasoning capabilities of Large Language Models",

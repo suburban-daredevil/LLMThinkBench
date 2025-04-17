@@ -5,7 +5,7 @@ This package provides tools to assess LLM performance on various reasoning tasks
 measuring accuracy, instruction following, and other metrics.
 """
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 __author__ = "Gaurav Srivastava"
 
 from .tasks.base_task import BaseTask
