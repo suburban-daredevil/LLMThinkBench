@@ -12,6 +12,10 @@ class MultiplicationTask(BaseTask):
     
     def generate_data(self, list_size, include_negatives=True):
         """Generate random lists of numbers for multiplication"""
+        
+        if self.seed is not None:
+            random.seed(self.seed)
+            
         data = []
         for _ in range(self.num_samples):
             if include_negatives:

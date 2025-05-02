@@ -3,6 +3,7 @@ import os
 import sys
 import logging
 import json
+import random
 from datetime import datetime
 import importlib
 
@@ -56,6 +57,9 @@ def parse_arguments():
                         help='Sampling top_p value')
     parser.add_argument('--max_tokens', type=int, default=512, 
                         help='Maximum tokens for sampling')
+    parser.add_argument('--seed', type=int, default=None,
+                        help='Seed value (default: random)')
+
     return parser.parse_args()
 
 def create_output_directory(args):
@@ -133,7 +137,7 @@ def main():
         
         # Get the task class
         task_class = load_task_class(task_name)
-        
+
         # Initialize the task
         task = task_class(
             model_handler=model_handler,
@@ -145,7 +149,8 @@ def main():
             store_details=args.store_details,
             temperature=args.temperature,
             top_p=args.top_p,
-            max_tokens=args.max_tokens
+            max_tokens=args.max_tokens,
+            seed=args.seed,
         )
         
         # Task-specific configuration

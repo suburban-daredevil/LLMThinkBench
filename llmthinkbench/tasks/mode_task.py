@@ -11,6 +11,10 @@ class ModeTask(BaseTask):
         return "mode"
     
     def generate_data(self, list_size):
+        
+        if self.seed is not None:
+            random.seed(self.seed)
+            
         data = []
         for _ in range(self.num_samples):
             # Start with random numbers

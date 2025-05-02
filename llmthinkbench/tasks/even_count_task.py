@@ -14,6 +14,10 @@ class EvenCountTask(BaseTask):
     
     def generate_data(self, list_size, include_negatives=True):
         """Generate random lists of numbers for counting even numbers"""
+        
+        if self.seed is not None:
+            random.seed(self.seed)
+            
         data = []
         if include_negatives:
             data = [random.sample(range(-100, 101), list_size) 

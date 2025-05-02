@@ -10,7 +10,7 @@ class BaseTask(ABC):
     """Abstract base class for all evaluation tasks"""
     
     def __init__(self, model_handler, output_dir, min_val, max_val, num_folds, 
-                 num_samples, store_details, temperature, top_p, max_tokens):
+                 num_samples, store_details, temperature, top_p, max_tokens, seed=None):
         """
         Initialize base task with common parameters
         
@@ -33,6 +33,7 @@ class BaseTask(ABC):
         self.num_folds = num_folds
         self.num_samples = num_samples
         self.store_details = store_details
+        self.seed = seed
         self.sampling_params = SamplingParams(
             temperature=temperature,
             top_p=top_p,

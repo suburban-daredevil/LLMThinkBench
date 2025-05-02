@@ -13,6 +13,10 @@ class ComparisonTask(BaseTask):
     
     def generate_data(self):
         """Generate pairs of numbers with equal distribution of comparison operators"""
+        
+        if self.seed is not None:
+            random.seed(self.seed)
+
         data = []
         
         # Calculate number of samples for each comparison type

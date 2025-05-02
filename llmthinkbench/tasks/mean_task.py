@@ -10,6 +10,10 @@ class MeanTask(BaseTask):
         return "mean"
     
     def generate_data(self, list_size):
+        
+        if self.seed is not None:
+            random.seed(self.seed)
+            
         data = []
         for _ in range(self.num_samples):
             numbers = [random.randint(self.min_val, self.max_val) for _ in range(list_size)]
