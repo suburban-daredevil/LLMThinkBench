@@ -14,6 +14,10 @@ class SortingTask(BaseTask):
     
     def generate_data(self, list_size):
         """Generate random lists of numbers within specified range"""
+        
+        if self.seed is not None:
+            random.seed(self.seed)
+            
         return [random.sample(range(self.min_val, self.max_val + 1), list_size) 
                 for _ in range(self.num_samples)]
     

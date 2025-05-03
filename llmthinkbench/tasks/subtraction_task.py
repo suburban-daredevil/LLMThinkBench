@@ -13,6 +13,10 @@ class SubtractionTask(BaseTask):
     
     def generate_data(self):
         """Generate pairs of numbers for subtraction"""
+        
+        if self.seed is not None:
+            random.seed(self.seed)
+
         data = []
         
         for _ in range(self.num_samples):

@@ -14,6 +14,10 @@ class FindMinimumTask(BaseTask):
     
     def generate_data(self, list_size, include_negatives=True):
         """Generate random lists of numbers within specified range"""
+        
+        if self.seed is not None:
+            random.seed(self.seed)
+            
         data = []
         for _ in range(self.num_samples):
             if include_negatives:

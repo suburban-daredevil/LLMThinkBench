@@ -13,6 +13,10 @@ class DivisionTask(BaseTask):
     
     def generate_data(self, **kwargs):
         """Generate random pairs of numbers for division"""
+        
+        if self.seed is not None:
+            random.seed(self.seed)
+            
         data = []
         
         for _ in range(self.num_samples):

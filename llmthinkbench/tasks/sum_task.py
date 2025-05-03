@@ -14,6 +14,10 @@ class SumTask(BaseTask):
     
     def generate_data(self, list_size, include_negatives=True):
         """Generate random lists of numbers within specified range"""
+        
+        if self.seed is not None:
+            random.seed(self.seed)
+            
         if include_negatives:
             return [random.sample(range(self.min_val, self.max_val + 1), list_size) 
                     for _ in range(self.num_samples)]

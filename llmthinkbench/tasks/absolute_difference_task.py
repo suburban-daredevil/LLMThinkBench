@@ -12,6 +12,10 @@ class AbsoluteDifferenceTask(BaseTask):
     
     def generate_data(self, list_size=2):
         """Generate random pairs of numbers for calculating absolute difference"""
+
+        if self.seed is not None:
+            random.seed(self.seed)
+            
         if list_size != 2:
             raise ValueError("Absolute difference task requires exactly 2 numbers.")
             
