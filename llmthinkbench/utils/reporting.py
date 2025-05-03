@@ -97,16 +97,16 @@ def generate_final_report(all_metrics, list_sizes, output_dir):
                     'std': round(np.std([m['instruction_followed_pct'] for m in task_metrics]), 4) if len(task_metrics) > 1 else 0
                 },
                 'response_length': {
-                    "mean": round(np.mean([m['response_lengths'] for m in size_metrics]), 2),
-                    "std": round(np.std([m['response_lengths'] for m in size_metrics]), 4) if len(size_metrics) > 1 else 0
+                    "mean": round(np.mean([m['avg_response_length'] for m in task_metrics]), 2),
+                    "std": round(np.std([m['avg_response_length'] for m in task_metrics]), 4) if len(task_metrics) > 1 else 0
                 },
                 "word_count":{
-                    "mean": round(np.mean([m['word_counts'] for m in size_metrics]), 2),
-                    "std": round(np.std([m['word_counts'] for m in size_metrics]), 4) if len(size_metrics) > 1 else 0
+                    "mean": round(np.mean([m['avg_word_count'] for m in task_metrics]), 2),
+                    "std": round(np.std([m['avg_word_count'] for m in task_metrics]), 4) if len(task_metrics) > 1 else 0
                 },
                 "output_tokens":{
-                    "mean": round(np.mean([m['output_tokens'] for m in size_metrics]), 2),
-                    "std": round(np.std([m['output_tokens'] for m in size_metrics]), 4) if len(size_metrics) > 1 else 0
+                    "mean": round(np.mean([m['avg_output_tokens'] for m in task_metrics]), 2),
+                    "std": round(np.std([m['avg_output_tokens'] for m in task_metrics]), 4) if len(task_metrics) > 1 else 0
                 }
             }
     
