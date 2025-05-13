@@ -37,7 +37,7 @@ class SortingTask(BaseTask):
         if instruction_followed:
             try:
                 # Allow for different order formats
-                accuracy = 1 if sorted(boxed_answer) == ground_truth else 0
+                accuracy = 1 if boxed_answer == ground_truth else 0
             except Exception as e:
                 logging.debug(f"Comparison error: {e}")
                 accuracy = 0
