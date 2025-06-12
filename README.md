@@ -1,22 +1,28 @@
 # 🧠 LLMThinkBench
 
-[![PyPI version](https://img.shields.io/badge/pypi-v0.1.4-blue)](https://pypi.org/project/llmthinkbench/0.1.4/)
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
+[![PyPI version](https://img.shields.io/badge/pypi-v0.1.5-blue)](https://pypi.org/project/llmthinkbench/0.1.5/)
+[![Python](https://img.shields.io/badge/Python-3.12%2B-blue)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![vLLM](https://img.shields.io/badge/Powered%20by-vLLM-orange)](https://github.com/vllm-project/vllm)
 [![HuggingFace](https://img.shields.io/badge/HuggingFace-Compatible-yellow)](https://huggingface.co/)
 
-## A Framework for Evaluating Reasoning Capabilities and Overthinking of Large Language Models
+## A Framework for Evaluating Basic Math Reasoning Capabilities and Overthinking of Language Models
 
-LLMThinkBench is a comprehensive framework designed to rigorously evaluate the reasoning capabilities of Large Language Models (LLMs). Through standardized and reproducible benchmarks, it offers valuable insights into how well models perform on various reasoning tasks, from basic arithmetic to complex logical operations.
+LLMThinkBench is a comprehensive framework designed to rigorously evaluate the basic math reasoning capabilities of Language Models, while also identifying instances of overthinking—where models apply unnecessarily complex logic to simple problems. Through standardized and reproducible benchmarks, it offers valuable insights into how well models perform on various reasoning tasks, from basic arithmetic to complex logical operations.
+
+<!-- <div align="center">
+  <img src="https://raw.githubusercontent.com/ctrl-gaurav/LLMThinkBench/main/assets/llmthinkbench_banner.png" alt="LLMThinkBench" width="600"/>
+</div> -->
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/ctrl-gaurav/LLMThinkBench/main/assets/llmthinkbench_banner.png" alt="LLMThinkBench" width="600"/>
+  <span style="font-size: 60px;">🧠</span>
 </div>
+
 
 ## 📰 News & Releases
 
-- **v0.1.4** (Current) - Major improvements to parsing robustness for fair evaluations. Enhanced result validation mechanisms and edge case handling.
+- **v0.1.5** (Latest) - Major backend revamp with robust error handling, intelligent fallback support, better token estimation, flexible device control, and smoother interruption handling.
+- **v0.1.4** - Major improvements to parsing robustness for fair evaluations. Enhanced result validation mechanisms and edge case handling.
 - **v0.1.3** - Added mean, median, mode tasks and implemented GPU customization options, allowing users to specify GPU memory allocation.
 - **v0.1.2** - Expanded task library with find_maximum, find_minimum, absolute_difference, and division tasks. Improved documentation.
 - **v0.1.1** - Fixed several inference issues and optimized performance using vLLM for high-throughput evaluation.
@@ -368,11 +374,11 @@ If you use LLMThinkBench in your research, please cite:
 
 ```
 @software{llmthinkbench2025,
-  author = {Gaurav Srivastava, Aafiya Hussain, Sriram Srinivasan, Aninditaa Chauhan},
+  author = {Gaurav Srivastava, Aafiya Hussain, Sriram Srinivasan, Xuan Wang},
   title = {LLMThinkBench: Advanced Reasoning and Overthinking Evaluation Framework for LLMs},
   year = {2025},
   url = {https://github.com/ctrl-gaurav/LLMThinkBench/},
-  version = {0.1.4}
+  version = {0.1.5}
 }
 ```
 

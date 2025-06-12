@@ -14,7 +14,7 @@ if len(sys.argv) > 1 and '--version' in sys.argv:
         print(f"LLMThinkBench version {__version__}")
         sys.exit(0)
     except ImportError:
-        print("LLMThinkBench version 0.1.4")
+        print("LLMThinkBench version 0.1.5")
         sys.exit(0)
 
 # Handle CUDA device selection early (before any CUDA-related imports)
@@ -98,7 +98,7 @@ def show_intro():
         from llmthinkbench import __version__
         version = __version__
     except ImportError:
-        version = "0.1.4"
+        version = "5"
     
     intro = f"""
 ╔═══════════════════════════════════════════════════════════════════════════════╗

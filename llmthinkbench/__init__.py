@@ -12,7 +12,7 @@ Features:
 - Professional CLI with detailed help and configuration options
 """
 
-__version__ = "0.1.4"
+__version__ = "0.1.5"
 __author__ = "Gaurav Srivastava"
 
 from .tasks.base_task import BaseTask

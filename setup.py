@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="llmthinkbench",
-    version="0.1.4",  # Initial version
+    version="0.1.5",  # Initial version
     author="Gaurav Srivastava",
     author_email="gauravhhh30@gmail.com",
     description="A framework for evaluating overthinking and basic reasoning capabilities of Large Language Models",
@@ -23,7 +23,7 @@ setup(
         "Intended Audience :: Science/Research",
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
     ],
-    python_requires=">=3.8",
+    python_requires=">=3.10",
     install_requires=[
         "vllm>=0.2.0",
         "transformers>=4.30.0",
