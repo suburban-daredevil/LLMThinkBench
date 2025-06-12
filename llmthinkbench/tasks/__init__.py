@@ -16,8 +16,6 @@ from .median_task import MedianTask
 from .mode_task import ModeTask
 from .subtraction_task import SubtractionTask
 
-# python -m llmthinkbench.cli --model_id "Qwen/Qwen2.5-1.5B-Instruct" --tensor_parallel_size 1 --gpu_memory_utilization 0.95 --temperature 0.7 --top_p 0.9 --max_tokens 1024 --tasks sorting comparison sum multiplication odd_count even_count absolute_difference division find_maximum find_minimum --datapoints 5 --list_sizes 8 --folds 1 --range -100 100 --store_details
-
 # Dict mapping task names to task classes
 AVAILABLE_TASKS = {
     "sorting": SortingTask,
