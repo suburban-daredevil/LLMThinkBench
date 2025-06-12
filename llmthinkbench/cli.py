@@ -18,30 +18,50 @@ if len(sys.argv) > 1 and '--version' in sys.argv:
         sys.exit(0)
 
 # Handle CUDA device selection early (before any CUDA-related imports)
+
 def setup_cuda_device():
-    """Setup CUDA device based on command line arguments"""
+    """Setup CUDA device(s) based on command line arguments"""
     cuda_device = None
     for i, arg in enumerate(sys.argv):
         if arg == '--cuda_device' and i + 1 < len(sys.argv):
             cuda_device = sys.argv[i + 1]
             break
-    
+
     if cuda_device:
-        # Validate CUDA device format
-        if cuda_device.startswith('cuda:'):
-            device_id = cuda_device.split(':')[1]
-            if device_id.isdigit():
-                os.environ['CUDA_VISIBLE_DEVICES'] = device_id
-                print(f"🔧 CUDA device set to: {cuda_device}")
-            else:
-                print(f"❌ Invalid CUDA device format: {cuda_device}. Expected format: cuda:0, cuda:1, etc.")
-                sys.exit(1)
+        # Remove whitespace and split by comma
+        devices = [d.strip() for d in cuda_device.split(',') if d.strip()]
+        if all(d.startswith('cuda:') for d in devices):
+            device_ids = [d.split(':')[1] for d in devices]
+            os.environ['CUDA_VISIBLE_DEVICES'] = ','.join(device_ids)
         else:
-            print(f"❌ Invalid CUDA device format: {cuda_device}. Expected format: cuda:0, cuda:1, etc.")
-            sys.exit(1)
-    else:
-        # Default to cuda:0
-        os.environ['CUDA_VISIBLE_DEVICES'] = '0'
+            raise ValueError(f"❌ Invalid CUDA device format: {cuda_device}. Expected format: cuda:0, cuda:1, etc.")
+
+
+
+# def setup_cuda_device():
+#     """Setup CUDA device based on command line arguments"""
+#     cuda_device = None
+#     for i, arg in enumerate(sys.argv):
+#         if arg == '--cuda_device' and i + 1 < len(sys.argv):
+#             cuda_device = sys.argv[i + 1]
+#             break
+    
+#     if cuda_device:
+#         # Validate CUDA device format
+#         if cuda_device.startswith('cuda:'):
+#             device_id = cuda_device.split(':')[1]
+#             if device_id.isdigit():
+#                 os.environ['CUDA_VISIBLE_DEVICES'] = device_id
+#                 print(f"🔧 CUDA device set to: {cuda_device}")
+#             else:
+#                 print(f"❌ Invalid CUDA device format: {cuda_device}. Expected format: cuda:0, cuda:1, etc.")
+#                 sys.exit(1)
+#         else:
+#             print(f"❌ Invalid CUDA device format: {cuda_device}. Expected format: cuda:0, cuda:1, etc.")
+#             sys.exit(1)
+#     else:
+#         # Default to cuda:0
+#         os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
 # Setup CUDA device early
 setup_cuda_device()
