@@ -14,9 +14,9 @@ LLMThinkBench is a comprehensive framework designed to rigorously evaluate the b
   <img src="https://raw.githubusercontent.com/ctrl-gaurav/LLMThinkBench/main/assets/llmthinkbench_banner.png" alt="LLMThinkBench" width="600"/>
 </div> -->
 
-<div align="center">
+<!-- <div align="center">
   <span style="font-size: 240px;">🧠</span>
-</div>
+</div> -->
 
 
 ## 📰 News & Releases
