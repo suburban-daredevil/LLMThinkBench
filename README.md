@@ -15,7 +15,7 @@ LLMThinkBench is a comprehensive framework designed to rigorously evaluate the b
 </div> -->
 
 <div align="center">
-  <span style="font-size: 60px;">🧠</span>
+  <span style="font-size: 240px;">🧠</span>
 </div>
 
 
