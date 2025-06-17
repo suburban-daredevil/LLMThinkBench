@@ -14,7 +14,7 @@ if len(sys.argv) > 1 and '--version' in sys.argv:
         print(f"LLMThinkBench version {__version__}")
         sys.exit(0)
     except ImportError:
-        print("LLMThinkBench version 0.1.5")
+        print("LLMThinkBench version 0.1.6")
         sys.exit(0)
 
 # Handle CUDA device selection early (before any CUDA-related imports)
@@ -366,7 +366,7 @@ def main_evaluation(args):
             task_metrics = task.run_evaluation(args.list_sizes)
         elif task_name == 'multiplication':
             # Use specific list sizes for multiplication task: 2, 4, and 8, error beyond list size 8
-            task_metrics = task.run_evaluation([16])
+            task_metrics = task.run_evaluation([2, 4, 8])
         else:
             # Generic task interface or pair-based tasks
             task_metrics = task.run_evaluation()
