@@ -10,6 +10,8 @@ import traceback
 from tqdm import tqdm
 from typing import List, Dict, Any, Optional, Tuple
 
+from google import genai
+
 # Add these imports for proper token counting
 try:
     import tiktoken
@@ -462,7 +464,35 @@ class BaseTask(ABC):
         except Exception as e:
             logging.warning(f"⚠️  Failed to regenerate data point: {e}")
             return original_data_point
-    
+        
+    # Function to get response from Gemini model
+    def generate_response_with_gemini(self, prompt, data_point):
+        
+        api_key = os.getenv("GEMINI_API_KEY")
+        model_name = os.getenv("GEMINI_MODEL")
+
+        client = genai.Client(api_key=api_key)
+
+        try:
+            # Generate response using gemini model
+            response = client.models.generate_content(
+                model=model_name,
+                contents=prompt
+            )
+            
+            # Return the response object
+            return response, response.usage.total_tokens, True, {
+                'model': model_name,
+                'prompt_tokens': response.usage.prompt_tokens,
+                'completion_tokens': response.usage.completion_tokens,
+                'total_tokens': response.usage.total_tokens,
+                'data_point_id': data_point.get('id', 'unknown')
+            }
+        except Exception as e:
+            print(f"Error getting response for prompt: {e}")
+            return f"Error: {str(e)}"
+
+        
     def run_fold(self, data, test_case_id, fold):
         """Run a single evaluation fold with enhanced error handling"""
         fold_results = []
@@ -476,7 +506,11 @@ class BaseTask(ABC):
                 prompt = self.create_prompt(data_point)
                 
                 # Generate response with retry mechanism
-                response, tokens, generation_success, generation_metadata = self.generate_response_with_retry(
+                # response, tokens, generation_success, generation_metadata = self.generate_response_with_retry(
+                #     prompt, data_point
+                # )
+
+                response, tokens, generation_success, generation_metadata = self.generate_response_with_gemini(
                     prompt, data_point
                 )
                 
@@ -509,7 +543,7 @@ class BaseTask(ABC):
                             "parsing_success": False,
                             "parsing_error": str(eval_error),
                             "predicted_answer": None,
-                            "ground_truth": data_point.get("answer", "unknown")
+                            "ground_truth": data_point["answer"] if data_point is not None else "unknown"
                         })
                 
                 else:
@@ -605,6 +639,8 @@ class BaseTask(ABC):
             List of metrics dictionaries
         """
         all_metrics = []
+
+        sleep_seconds = int(os.getenv("SECONDS_TIME_OUT_BETWEEN_REQUESTS"))
         
         try:
             # Determine test cases based on task type
@@ -637,6 +673,10 @@ class BaseTask(ABC):
                 for fold in range(self.num_folds):
                     try:
                         fold_metrics = self.run_fold(data, test_case_id, fold)
+
+                        time.sleep(sleep_seconds)  # Respect rate limits
+                        logging.info(f"Sleeping for {sleep_seconds} seconds for rate limit compliance...")
+
                         all_metrics.append(fold_metrics)
                         
                     except Exception as e:
